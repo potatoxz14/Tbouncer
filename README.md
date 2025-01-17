@@ -1,28 +1,18 @@
-# README
+# Tbouncer
 
-## Overview
+This is the source code of Tbouncer.
 
-This repository is designed for fuzzing syscall handling in Tcons.
+## Project Structure
 
-## Directory Structure
+This project is designed to fuzz different types of Tcons (Trusted Communication Nodes) using various fuzzing techniques. It is divided into the following directories:
 
-### `syscall`
+### `process-based/`
+This directory contains code based on **eBPF (Extended Berkeley Packet Filter)** technology. It is used to fuzz **Process-based Tcons**. The eBPF-based code interacts with the kernel to trace and monitor system calls and activities of the processes, helping to detect vulnerabilities during fuzzing.
 
-- Contains modified system call files originally derived from the LTP (Linux Test Project) repository.
-- **Files with the** `**iago**` **prefix**: These files triger mutating system call return values to `4099` during execution, and check if the return value has been changed successfully. This behavior is implemented to simulate Iago attacks for fuzzing purposes.
-- **Other files**: These files do not triger mutation but noly triger logging system call chains using eBPF for analysis and monitoring.
+### `vm-based/`
+This directory contains code for fuzzing **VM-based Tcons**. The code is designed to fuzz virtual machine-based Tcons by interacting with the virtual machine environment and performing various tests to detect issues or vulnerabilities.
 
-### `iago`
+## Usage
 
-- Includes PoC demos for five types of Iago attacks as described in the Emilia paper.
-- Demonstrates how system call manipulation can be exploited to undermine application security.
+You can build and run the fuzzing tools in each directory depending on the type of Tcon you want to fuzz.
 
-### `mutation`
-
-- Contains the logic responsible for modifying system call return values.
-
-### `syscall_monitor`
-
-- Implements system call capture and monitoring using eBPF.
-
-## 
